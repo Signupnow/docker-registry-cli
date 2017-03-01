@@ -3,7 +3,7 @@ package main
 import (
  "encoding/json"
   "fmt"
-  "github.com/codegangsta/cli"
+  "github.com/urfave/cli"
   "io/ioutil"
   "log"
   "net/http"
@@ -14,7 +14,7 @@ import (
 func main() {
   app := cli.NewApp()
   app.Name = "docker-reg"
-  app.Version = "0.0.1"
+  app.Version = "0.0.2"
   app.Usage = "CLI to list/remove repositories and repository tags from a private Docker registry"
   app.Action = func(c *cli.Context) {
     println("For usage:\n\t",app.Name,"help")
@@ -26,17 +26,18 @@ func main() {
   app.Flags = []cli.Flag {
     cli.StringFlag{
       Name: "domain, d",
-      Usage: "Hostname for private registry, example: registry.mydomain.com.",
+      Value: "localhost",
+      Usage: "Hostname for private registry, default: localhost",
     },
     cli.StringFlag{
       Name: "port, p",
-      Value: "443",
-      Usage: "Port for private registry, default: 443",
+      Value: "5000",
+      Usage: "Port for private registry, default: 5000",
     },
     cli.StringFlag{
       Name: "scheme, s",
-      Value: "https",
-      Usage: "Scheme for private registry, default: https",
+      Value: "http",
+      Usage: "Scheme for private registry, default: http",
     },
     cli.StringFlag{
       Name: "user, u",
